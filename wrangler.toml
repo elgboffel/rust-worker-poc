@@ -1,4 +1,4 @@
-name = "worker-rust"
+name = "worker-cold-queen-18cd"
 main = "build/worker/shim.mjs"
 compatibility_date = "2023-12-01"
 
