@@ -18,5 +18,5 @@ async fn main(
 }
 
 pub async fn root() -> &'static str {
-    "Hello Axum!"
+    "Hello Johnny Axum!"
 }
