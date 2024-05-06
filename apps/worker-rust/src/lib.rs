@@ -1,5 +1,3 @@
-mod common;
-
 use axum::{routing::get, Router, extract::{State, Json}};
 use serde::{Deserialize, Serialize};
 use tower_service::Service;
@@ -30,6 +28,8 @@ async fn main(
     let state = AppState { locale: LOCALE};
 
     Ok(router(state).call(req).await?)
+
+
 }
 
 pub async fn root(State(state): State<AppState>) -> &'static str {
