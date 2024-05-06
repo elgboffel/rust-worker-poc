@@ -2,6 +2,7 @@ use axum::{routing::get, Router, extract::{State, Json}};
 use serde::{Deserialize, Serialize};
 use tower_service::Service;
 use worker::*;
+use common::add;
 
 
 #[derive(Clone)]
@@ -38,12 +39,12 @@ pub async fn root(State(state): State<AppState>) -> &'static str {
 
 #[derive(Serialize, Deserialize, Debug)]
 struct TestResponse {
-    locale: &'static str,
+    locale: String,
 }
 
 pub async fn test(State(state): State<AppState>) -> Json<TestResponse> {
     let response = TestResponse {
-        locale: state.locale
+        locale: format!("{}, {}", &state.locale, &add(1, 3).to_string())
     };
 
     Json(response)
