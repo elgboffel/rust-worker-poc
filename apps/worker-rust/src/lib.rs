@@ -8,18 +8,16 @@ use axum::body::Body;
 use utoipa::{OpenApi, ToSchema};
 use utoipauto::utoipauto;
 
-#[utoipauto(paths = "./apps/worker-rust/src")]
+#[utoipauto( paths = "apps/worker-rust/src" )]
 #[derive(OpenApi)]
-#[openapi(paths(openapi))]
+#[openapi(
+    tags(
+        (name = "Rust Worker", description = "Test endpoints for cloudflare workers")
+    ),
+)]
 pub struct ApiDoc;
 
-#[utoipa::path(
-    get,
-    path = "/api-docs/openapi.json",
-    responses(
-        (status = 200, description = "JSON file", body = ())
-    )
-)]
+//noinspection ALL
 async fn openapi() -> Json<utoipa::openapi::OpenApi> {
     Json(ApiDoc::openapi())
 }
@@ -49,7 +47,7 @@ async fn main(
     const LOCALE: &str = "en";
     let state = AppState { locale: LOCALE};
 
-    let mut response = router(state).call(req).await?;
+    let response = router(state).call(req).await?;
 
     Ok(response)
 }
