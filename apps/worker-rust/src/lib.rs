@@ -53,7 +53,7 @@ async fn main(
 }
 
 pub async fn root(State(_state): State<AppState>) -> String {
-    "test".to_string()
+    "test 2".to_string()
 }
 
 #[derive(Serialize, Deserialize, Debug, ToSchema)]
